@@ -1,6 +1,6 @@
 import pytest
 
-from homeassistant import _create_ha_id
+from homeassistant.components.homematic import _create_ha_id
 
 
 def test_create_ha_id():
@@ -17,3 +17,4 @@ def test_create_ha_id():
     assert _create_ha_id("Device1", None, "param1", 2) == None
     assert _create_ha_id("Device1", "channel1", None, -1) == None
     assert _create_ha_id(None, "channel1", "param1", 2) == None
+
