@@ -118,3 +118,32 @@ def test_json_dumps_rgb_color_subclass():
     rgb = RGBColor(4, 2, 1)
 
     assert json_dumps(rgb) == "[4,2,1]"
+    
+def test_json_encoder_default():
+    # Test set conversion
+    obj = set([1, 2, 3])
+    expected = [1, 2, 3]
+    result = json_encoder_default(obj)
+    assert result == expected
+
+    # Test float conversion
+    obj = 3.14
+    expected = 3.14
+    result = json_encoder_default(obj)
+    assert result == expected
+
+    # Test Path conversion
+    obj = Path("/tmp")
+    expected = "/tmp"
+    result = json_encoder_default(obj)
+    assert result == expected
+
+    # Test as_dict conversion
+    class DummyClass:
+        def as_dict(self):
+            return {"a": 1}
+
+    obj = DummyClass()
+    expected = {"a": 1}
+    result = json_encoder_default(obj)
+    assert result == expected
